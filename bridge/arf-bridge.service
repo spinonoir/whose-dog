@@ -1,0 +1,15 @@
+[Unit]
+Description=whose.dog Signal alert bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/arf/bridge.env
+ExecStart=/usr/bin/node %h/projects/whosedog/bridge/arf-bridge.mjs
+# Least privilege: this only needs network and its own signal-cli store.
+PrivateTmp=true
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.local/share/signal-cli
