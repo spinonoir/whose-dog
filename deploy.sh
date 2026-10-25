@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pushes secrets and deploys. Run AFTER `npx wrangler login`.
+# Pushes secrets and deploys. Auth comes from .secrets/cf-api-token.
 # Secrets are piped from .secrets/ so they never appear in argv or shell history.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -8,6 +8,12 @@ need() { [ -f "$1" ] || { echo "missing $1"; exit 1; }; }
 need .secrets/seed-key
 need .secrets/poller-token
 need .secrets/ntfy-topic
+need .secrets/cf-api-token
+need .secrets/cf-account-id
+
+# Non-interactive auth: wrangler picks these up instead of `wrangler login`.
+export CLOUDFLARE_API_TOKEN="$(tr -d '\n' < .secrets/cf-api-token)"
+export CLOUDFLARE_ACCOUNT_ID="$(tr -d '\n' < .secrets/cf-account-id)"
 
 echo "==> secrets"
 tr -d '\n' < .secrets/seed-key     | npx wrangler secret put SEED_KEY
