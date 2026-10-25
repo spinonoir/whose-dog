@@ -3,6 +3,7 @@ import { handleCheckin, htmlHeaders } from './checkin.js';
 import { handleEnroll } from './enroll.js';
 import { handleAdmin } from './admin.js';
 import { handlePoll } from './notify.js';
+import { handleHome, recipes } from './home.js';
 import { runWatcher } from './watch.js';
 
 // Every unknown path returns this exact response, so probing for the check-in
@@ -17,7 +18,7 @@ export default {
 
     try {
       if (head === '') {
-        return new Response(H.landing(), htmlHeaders());
+        return handleHome(url.searchParams.get('tag'));
       }
       if (head === 'robots.txt') {
         return new Response('User-agent: *\nDisallow: /\n', {
@@ -32,6 +33,15 @@ export default {
       }
       if (head === 'admin') {
         return await handleAdmin(request, env, seg[1]);
+      }
+      const recipe = seg.length === 1 && recipes.find((r) => r.path === head);
+      if (recipe) {
+        return recipe.handle();
+      }
+      // Old one-word recipe paths, so links shared before the rename still work.
+      const moved = seg.length === 1 && recipes.find((r) => r.was === head);
+      if (moved) {
+        return Response.redirect(`${url.origin}/${moved.path}`, 301);
       }
       if (head === '_poll') {
         return await handlePoll(request, env);
