@@ -111,6 +111,14 @@ export const catalog = [
     tags: ['side', 'salad', 'no-cook'],
   },
   {
+    path: 'chicken-parm', accent: ['#1f6b45', '#5fcf94'],
+    kind: 'Sandwich &middot; air fryer',
+    title: 'Air Fryer Chicken Parmesan Sandwiches',
+    blurb: 'Panko-Parmesan cutlets air-fried crisp, topped with a quick crushed tomato and basil sauce and melted mozzarella on toasted Telera rolls.',
+    meta: ['680g chicken', '200°C &middot; 11–12 min'],
+    tags: ['main', 'chicken', 'air-fryer', 'sandwich'],
+  },
+  {
     path: 'apple-pie', was: 'applepie', accent: ['#a8392b', '#e8735f'],
     kind: 'Pie',
     title: 'Spiced Bourbon Triple-Apple Lattice Pie',

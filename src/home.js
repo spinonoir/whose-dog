@@ -15,6 +15,7 @@ import { handleGreenBeans } from './recipes/green-beans.js';
 import { handleFiletMignon } from './recipes/filet-mignon.js';
 import { handleRoastedAsparagus } from './recipes/roasted-asparagus.js';
 import { handleBuffaloWings } from './recipes/buffalo-wings.js';
+import { handleChickenParm } from './recipes/chicken-parm.js';
 import { handleAppleSlaw } from './recipes/apple-slaw.js';
 import { handleApplePie } from './recipes/apple-pie.js';
 import { handlePumpkin } from './recipes/pumpkin-pie.js';
@@ -34,6 +35,7 @@ const pages = {
   'roasted-asparagus': handleRoastedAsparagus,
   'buffalo-wings': handleBuffaloWings,
   'apple-slaw': handleAppleSlaw,
+  'chicken-parm': handleChickenParm,
   'apple-pie': handleApplePie,
   'pumpkin-pie': handlePumpkin,
   'pumpkin-tart': handlePumpkinTart,
